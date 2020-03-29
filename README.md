@@ -3,6 +3,8 @@ Julia Solvers for GLM specializing in calculations on large data sets that do no
 
 This library implements Generalized Linear Models in both Julia and the D programming language. It attempts to create a comprehensive library that can handle larger datasets on multicore machines by dividing the computations to blocks that can be carried out in memory (for speed) and on disk (to conserve computational resources). It offers a variety of solvers that gives the user choice, flexibility and control, and also aims to be a fully comprehensive library in terms of post processing and to be comparable in performance with the best open source GLM solver libraries, comprehensive, convenient and simple to install and use.
 
+See `demos` folder for examples of usage.
+
 ## Prerequisites
 * Openblas BLAS/LAPACK library
 
@@ -142,6 +144,6 @@ Version 1.1
 # References
 
 1. Generalized Linear Models and Extensions, 3rd Edition, James W. Hardin, Joseph M. Hilbe.
-2. Routines for BLAS, LAPACK, MAGMA, [http://www.icl.utk.edu/~mgates3/docs/lapack.html](http://www.icl.utk.edu/~mgates3/docs/lapack.html).
+2. Routines for BLAS, LAPACK, MAGMA, Mark Gates, [http://www.icl.utk.edu/~mgates3/docs/lapack.html](http://www.icl.utk.edu/~mgates3/docs/lapack.html).
 3. Matrix Computations, 4th Edition, Gene H. Golub, Charles F. Van Loan.
 4. Generalized Additive Models, An Introduction with R, 2nd Edition, Simon N. Wood.
