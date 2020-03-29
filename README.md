@@ -1,7 +1,7 @@
 # glmSolverjl
 Julia Solvers for GLM specializing in calculations on large data sets that do not necessarily fit into memory and minimizing the memory required to run algorithms and using multicores.
 
-This library implements Generalized Linear Models in both Julia and the D programming language. It attempts to create a comprehensive library that can handle larger datasets on multicore machines by dividing the computations to blocks that can be carried out in memory (for speed) and on disk (to conserve computational resources). It offers a variety of solvers that gives the user choice, flexibility and control, and also aims to be a fully comprehensive library in terms of post processing and to be comparable in performance with the best open source GLM solver libraries, comprehensive, convenient and simple to install and use.
+This library implements Generalized Linear Models in the Julia programming language. It attempts to create a comprehensive library that can handle larger datasets on multicore machines by dividing the computations to blocks that can be carried out in memory (for speed) and on disk (to conserve computational resources). It offers a variety of solvers that gives the user choice, flexibility and control, and also aims to be a fully comprehensive library in terms of post processing and to be comparable in performance with the best open source GLM solver libraries, comprehensive, convenient and simple to install and use.
 
 See `demos` folder for examples of usage.
 
@@ -51,16 +51,12 @@ can be tried out. Link Functions:
   There will be four options for least squares solvers min ||b - Av||_2:
     - [x] (a) `gels` Least squares solver using QR decomposition, requires *full rank* matrix A.
     - [x] (b) `gelsy` Orthogonal Factorization Solver.
-    - [x] (c) `gelss` SVD Solver. (D Only)
     - [x] (d) `gelsd` SVD Solver divide & conquer.
   Matrix inverse algorithms (A^-1) to include:
     - [x] (a) `getri` LU Decomposition Inverse, `getrf` precursor.
     - [x] (b) `potri` Cholesky Decomposition Inverse, `potrf` precursor.
     - [x] (c) `sytri` LU Decomposition Inverse, `sytrf` precursor.
     - [x] (d) `svds` - My own name use SVD to do generalized inverse.
-  Do this for 
-    - [x] (a) D.
-    - [x] (b) Julia.
   The Names used `GETRIInverse`, `POTRIInverse`, `SYTRFInverse`, `GESVDInverse`, `GESVSolver`, `POSVSolver`, `SYSVSolver`, `GELSSolver`, `GELSYSolver`, `GELSSSolver`, `GELSDSolver`.
   - [x] iii. Dispersion (phi) - **Done** function which you divide the `(XWX)^-1` matrix by to get the covariance matrix - **Done**. You will need to use page 110 of the Wood's GAM book, note that the Binomial and Poisson Distribution has `phi = 1`.
   - [ ] iv. Implement blocking matrix techniques using the techniques used in Golub's and Van Loan's Matrix Computations book.
@@ -88,16 +84,13 @@ can be tried out. Link Functions:
     - [x] (b) Change examples using simulated data rather than external (user unavailable data).
   - [ ] ix. Implement L-BFGS solver options.
   - [ ] x. Include a sparse solver?
-  - [ ] xi. Is there a case for substituting D's `new T[]` notation for
-  the initialiaztion used [here](https://gist.github.com/dataPulverizer/4897b01a8cb501eae8107c4220e36a82) which is faster for initilizations especially for non default values and can be parallelised.
   - [ ] xii. Step control exceeding should not result in failure but exiting
   with non convergence and a printed message.
   - [ ] xiii. Code refactoring.
-- [ ] 3. Implement memory and disk blocked matrix structure in Julia & D and
+- [ ] 3. Implement memory and disk blocked matrix structure and
          integrate them with your current algorithm. Creating a generic interface that could contend with any data structure with the right methods returning the right types to the function(s).
 - [ ] 4. Implement or adapt the current GLM algorithm to work with the memory and disk based blocked matrix data structures - Done for memory.
-- [ ] 5. ~~Implement blocked data table for disk and in memory and their 
-         mechanisms to be converted to your blocked data matrix structures. Use data.table, tibble, and r-frame as inspirations. There are many references to building data structures for instance you can search for lecture/notes on data table structures from reputable universities. Start by doing simple implementations as in your last package and then modify it with your new knowledge. There is no need to implement select, merge, sort algorithms. For now this blocked data table structure is simply for storing the data so that it can be converted to a blocked model matrix.~~ For now we can leverage R's `data.frames/data.table` structure and Julia's [DataFrames.jl package](http://juliadata.github.io/DataFrames.jl/v0.9/man/formulas/) which allows us to create model matrices. Therefore we can use binary IO of data table blocks to disk and memory using the current data table constructs in both languages. The main issue is whether we can do disk IO concurrently; in Julia concurrency is straightforward but concurrent disk IO is unknown. In R any computation or IO in R itself will be inefficient so later on we **must** create a native data table implementation in D which will hopefully allow us to fully parallelize the algorithm both on disk and in memory. Compare your algorithm's performance with other implementations R, Python, Julia, H20, Scala Spark. If can show better or equal performance to all of these that would be a good start.
+- [ ] 5. On disk representation of blocked data tables.
 - [ ] 6. Write and finalise the documentation.
 
 Version 0.2 Post-Processing & Model Search Implementation
