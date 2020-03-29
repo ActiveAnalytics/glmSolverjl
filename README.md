@@ -79,9 +79,7 @@ can be tried out. Link Functions:
   - [ ] vii. Look for further performance optimization, use **packed** format for symmetric matrix calls which would require fewer computations and could make a difference for problems with a large number of parameters.
   - [ ] viii.  Implement data synthesis functions for GLM. Use Chapter 5 of Hardin & Hilbe and use this for benchmarking. So that users can demo without
   data dependancy.
-  - [ ] viii.  Data synthesis and library consolidation.
-    - [x] (a) Implement the data synthesis functions.
-    - [x] (b) Change examples using simulated data rather than external (user unavailable data).
+  - [x] viii.  Data synthesis and library consolidation.
   - [ ] ix. Implement L-BFGS solver options.
   - [ ] x. Include a sparse solver?
   - [ ] xii. Step control exceeding should not result in failure but exiting
